@@ -102,7 +102,7 @@ function App() {
 
   const qty = cart.reduce((a, x) => a + x.qty, 0);
 
-  const discountRate = coupon.trim().toUpperCase() === "TIE5" ? 30 : 0;
+  const discountRate = coupon.trim().toUpperCase() === "TIE5" ? 51 : 0;
 
   const unit = 550 - discountRate;
 
@@ -820,7 +820,7 @@ function App() {
                 sm:text-xl
               "
                     >
-                      Get 30Tk off per piece
+                      Get 51Tk off per piece
                     </h3>
 
                     <p
@@ -848,7 +848,7 @@ function App() {
                         TIE5
                       </span>{" "}
                       and pay only{" "}
-                      <strong className="text-[#111]">520Tk</strong> per piece
+                      <strong className="text-[#111]">499Tk</strong> per piece
                     </p>
                   </div>
                 </div>
@@ -1253,7 +1253,7 @@ function App() {
               </h2>
 
               <p className="hind text-sm sm:text-base">
-                Coupon TIE5 ব্যবহার করলে selected প্রতিটি piece 520Tk। Delivery
+                Coupon TIE5 ব্যবহার করলে selected প্রতিটি piece 499Tk। Delivery
                 আলাদা হিসাব হবে।
               </p>
             </div>
@@ -1272,7 +1272,7 @@ function App() {
               <div className="hot">
                 <em>TIE5</em>
                 <b>Coupon</b>
-                <strong>520Tk</strong>
+                <strong className="text-[#F54900]">499Tk</strong>
               </div>
             </div>
           </div>
