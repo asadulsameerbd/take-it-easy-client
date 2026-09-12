@@ -898,7 +898,7 @@ function App() {
               text-[#111]
             "
                     >
-                      520Tk
+                      499Tk
                       <span
                         className="
                 ml-1
