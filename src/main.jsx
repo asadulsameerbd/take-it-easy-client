@@ -1626,7 +1626,7 @@ function App() {
                         sm:px-3
                         ${
                           paymentMethod === method.id
-                            ? "border-[#F54900] bg-[#fff4ee] shadow-[0_8px_25px_rgba(245,73,0,0.12)]"
+                            ? "border-[#ff4d00] bg-[#fff4ee] shadow-[0_8px_25px_rgba(245,73,0,0.12)]"
                             : "border-gray-200 bg-white hover:-translate-y-0.5 hover:border-gray-400 hover:shadow-md"
                         }
                       `}
@@ -1644,7 +1644,7 @@ function App() {
                           group-hover:scale-110
                           ${
                             paymentMethod === method.id
-                              ? "bg-[#F54900] text-white"
+                              ? "bg-[#fff] text-white"
                               : "bg-gray-100 text-gray-700"
                           }
                         `}
