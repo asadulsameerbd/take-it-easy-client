@@ -335,9 +335,22 @@ function App() {
         },
       );
 
-      const data = await res.json();
+      const contentType = res.headers.get("content-type") || "";
 
-      if (!res.ok) throw new Error(data.message || "Order failed");
+      let data;
+
+      if (contentType.includes("application/json")) {
+        data = await res.json();
+      } else {
+        const text = await res.text();
+        throw new Error(
+          `Server response JSON নয়। Status: ${res.status}. ${text.slice(0, 150)}`,
+        );
+      }
+
+      if (!res.ok) {
+        throw new Error(data.message || "Order failed");
+      }
 
       setCart([]);
       setPaymentMethod("cod");
