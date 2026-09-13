@@ -7,7 +7,7 @@ const PRODUCTS = [
   {
     id: 1,
     name: "Naruto Black",
-    sizes: { M: 2, L: 2 },
+    sizes: { M: 2, L: 2, Xl: 0 },
     tone: "#151515",
     image: "/assets/naruto.jpg",
   },
@@ -85,7 +85,6 @@ function App() {
     ),
   );
 
-  const [coupon, setCoupon] = useState("");
   const [area, setArea] = useState("80");
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const [transactionId, setTransactionId] = useState("");
@@ -102,12 +101,12 @@ function App() {
 
   const qty = cart.reduce((a, x) => a + x.qty, 0);
 
-  const discountRate = coupon.trim().toUpperCase() === "TIE5" ? 51 : 0;
+  const discountRate = 0; // Coupon temporarily disabled
 
-  const unit = 550 - discountRate;
+  const unit = 450;
 
-  const subtotal = qty * 550;
-  const discount = qty * discountRate;
+  const subtotal = qty * 450;
+  const discount = 0;
   const total = qty * unit + Number(area);
 
   const items = useMemo(
@@ -373,7 +372,7 @@ function App() {
 
             deliveryArea: Number(area),
 
-            coupon: coupon.trim().toUpperCase(),
+            coupon: "",
 
             items: items.map((x) => ({
               productId: x.id,
@@ -418,7 +417,6 @@ function App() {
       setPaymentMethod("cod");
       setTransactionId("");
       setPaymentImage(null);
-      setCoupon("");
 
       await Swal.fire({
         icon: "success",
@@ -485,7 +483,7 @@ function App() {
             {/* Hero Content */}
             <div className="mx-auto max-w-2xl text-center md:mx-0 md:text-left">
               {/* Badge */}
-              <div className="mb-5 flex justify-center sm:mb-6 md:justify-start">
+              <div className="mb-5  flex justify-center sm:mb-6 md:justify-start">
                 <span
                   className="
                   inline-flex items-center gap-2
@@ -820,7 +818,7 @@ function App() {
                 sm:text-xl
               "
                     >
-                      Get 51Tk off per piece
+                      ৳590 এর জিনিস এখন মাত্র ৳450
                     </h3>
 
                     <p
@@ -845,10 +843,10 @@ function App() {
                   text-white
                 "
                       >
-                        TIE5
+                        OFFER
                       </span>{" "}
                       and pay only{" "}
-                      <strong className="text-[#111]">499Tk</strong> per piece
+                      <strong className="text-[#111]">450Tk</strong> per piece
                     </p>
                   </div>
                 </div>
@@ -898,7 +896,7 @@ function App() {
               text-[#111]
             "
                     >
-                      499Tk
+                      450Tk
                       <span
                         className="
                 ml-1
@@ -1008,7 +1006,7 @@ function App() {
               </div>
 
               <div className="space text-sm sm:text-base">
-                <del>600Tk</del> <b className="text-[#FF5A00]">550Tk</b>{" "}
+                <del>590Tk</del> <b className="text-[#FF5A00]">450Tk</b>{" "}
                 <small>/piece</small>
               </div>
             </div>
@@ -1027,6 +1025,52 @@ function App() {
                     overflow-hidden
                   "
                   >
+                    {/* Cute 25% OFF Badge */}
+                    <div
+                      className="
+    absolute
+    right-3
+    top-3
+    z-20
+    flex
+    h-8
+    min-w-[62px]
+    items-center
+    justify-center
+    rounded-md
+    border
+    border-white/25
+    bg-[#F54900]
+    px-2
+    shadow-md
+    shadow-orange-600/20
+    transition-all
+    duration-300
+    group-hover:scale-105
+    group-hover:shadow-lg
+    group-hover:shadow-orange-600/30
+    sm:right-4
+    sm:top-4
+    sm:h-9
+    sm:min-w-[68px]
+    sm:px-2.5
+  "
+                    >
+                      <span
+                        className="
+      space
+      whitespace-nowrap
+      text-[10px]
+      font-extrabold
+      leading-none
+      tracking-wide
+      text-white
+      sm:text-[11px]
+    "
+                      >
+                        25% OFF
+                      </span>
+                    </div>
                     <img
                       src={p.image}
                       alt={p.name}
@@ -1191,7 +1235,7 @@ function App() {
                           font-semibold
                         "
                         >
-                          550Tk
+                          450Tk
                         </span>
                       </span>
 
@@ -1252,27 +1296,26 @@ function App() {
                 <span>Better deal.</span>
               </h2>
 
-              <p className="hind text-sm sm:text-base">
-                Coupon TIE5 ব্যবহার করলে selected প্রতিটি piece 499Tk। Delivery
-                আলাদা হিসাব হবে।
+              <p className="space text-sm sm:text-base">
+                Get 25% off on any design.
               </p>
             </div>
 
             <div className="comboCards">
               <div>
                 <b>1 Piece</b>
-                <strong>550Tk</strong>
+                <strong>590Tk</strong>
               </div>
 
               <div>
                 <b>2 Pieces</b>
-                <strong>1,100Tk</strong>
+                <strong>1100Tk</strong>
               </div>
 
               <div className="hot">
-                <em>TIE5</em>
-                <b>Coupon</b>
-                <strong className="text-[#F54900]">499Tk</strong>
+                <em>OFFER</em>
+                <b>Price 🤩</b>
+                <strong className="text-[#F54900]">450Tk</strong>
               </div>
             </div>
           </div>
@@ -1532,11 +1575,11 @@ function App() {
                 </label>
 
                 <label>
-                  Coupon
+                  Special Offer
                   <input
-                    value={coupon}
-                    onChange={(e) => setCoupon(e.target.value)}
-                    placeholder="TIE5"
+                    value="৳590 এর জিনিস এখন মাত্র ৳450"
+                    readOnly
+                    aria-label="Current offer"
                   />
                 </label>
               </div>
