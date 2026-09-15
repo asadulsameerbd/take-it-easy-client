@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import Swal from "sweetalert2";
 import "./styles.css";
+import { initMetaPixel, trackEvent } from "./metaPixel";
 
 const PRODUCTS = [
   {
@@ -73,6 +74,8 @@ const PAYMENT_INFO = {
   },
 };
 
+initMetaPixel();
+
 function App() {
   const [cart, setCart] = useState([]);
 
@@ -131,6 +134,14 @@ function App() {
 
       return;
     }
+
+    trackEvent("AddToCart", {
+      content_ids: [String(p.id)],
+      content_name: p.name,
+      content_type: "product",
+      value: unit,
+      currency: "BDT",
+    });
 
     setCart((currentCart) => {
       const found = currentCart.find(
@@ -336,6 +347,13 @@ function App() {
 
     if (!confirmation.isConfirmed) return;
 
+    trackEvent("InitiateCheckout", {
+      content_ids: items.map((x) => String(x.id)),
+      num_items: qty,
+      value: total,
+      currency: "BDT",
+    });
+
     setSending(true);
 
     Swal.fire({
@@ -412,6 +430,14 @@ function App() {
       if (!res.ok) {
         throw new Error(data.message || "Order failed");
       }
+
+      trackEvent("Purchase", {
+        content_ids: items.map((x) => String(x.id)),
+        content_type: "product",
+        num_items: qty,
+        value: total,
+        currency: "BDT",
+      });
 
       setCart([]);
       setPaymentMethod("cod");
@@ -1013,7 +1039,19 @@ function App() {
 
             <div className="grid">
               {PRODUCTS.map((p) => (
-                <article className="product" key={p.id}>
+                <article
+                  className="product"
+                  key={p.id}
+                  onMouseEnter={() =>
+                    trackEvent("ViewContent", {
+                      content_ids: [String(p.id)],
+                      content_name: p.name,
+                      content_type: "product",
+                      value: unit,
+                      currency: "BDT",
+                    })
+                  }
+                >
                   <div
                     className="
                     art
@@ -1031,7 +1069,7 @@ function App() {
     absolute
     right-3
     top-3
-    z-20
+    z-0
     flex
     h-8
     min-w-[62px]
