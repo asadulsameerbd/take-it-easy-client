@@ -487,7 +487,7 @@ function App() {
 
           <a
             className="
-              rounded-lg bg-black
+              rounded-lg -z-30 bg-black
               px-4 py-2.5 sm:px-5 sm:py-3
               hind text-sm sm:text-base
               text-white!
@@ -1245,7 +1245,7 @@ function App() {
                       <span
                         className="
                         relative
-                        z-10
+                        z-0
                         inline-flex
                         items-center
                         justify-center
